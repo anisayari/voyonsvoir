@@ -5,6 +5,42 @@ Voici un repo totalement vide : vous en faites ce que vous voulez, vous dev tout
 
 ---
 
+## Faisons des divisions avec des expressions régulières 🚀
+
+Il existe un jeu pour s'entrainer en algorithmie : *FooBarQix*
+
+Selon un nombre en entrée les regles, une chaîne de caractères doit être renvoyée selon les règles suivantes :
+
+- *Foo* si le nombre est divisible par 3
+- *Bar* si le nombre est divisible par 5
+- *Qix* si le nombre est divisible par 7
+- Les 3 premières règles sont cumulatives
+- Le nombre lui même s'il n'est divisible ni par 3, 5 ou 7
+
+### Exemples
+```
+1  => 1
+2  => 2
+3  => Foo (divisible par 3)
+4  => 4
+5  => Bar (divisible par 5)
+6  => Foo
+7  => Qix (divisible par 7)
+8  => 8
+9  => Foo
+10 => Bar
+13 => Foo
+15 => FooBar (divisible par 3 et 5)
+21 => FooQix (divisible par 3 et 7)
+51 => FooBar
+53 => BarFoo
+107 => FooBarQix (divisible par 3, 5 et 7)
+```
+
+Je vous partage donc une implémentation avec Nginx uniquement juste [ici](./division-regex-foobarqix-nginx/foobarqix.conf).
+
+Pour tester, utilisez le docker-compose, et faites une requete avec le nombre de votre choix : `curl localhost:3570/{NUMBER}`
+
 ## 🍫 ChocoRoulette - Le Jeu en Ligne 🌶️
 
 > [!CAUTION]
