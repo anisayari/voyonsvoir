@@ -51,7 +51,7 @@ Ces checks reduisent le risque mais ne garantissent pas qu'un programme soit san
 
 ---
 
-# 🚀 GrokTrade Landing Page
+# 🚀 GrokTrade Landing Page ! 
 
 Une landing page moderne pour une plateforme de trading automatisé propulsée par l'IA Grok.
 
