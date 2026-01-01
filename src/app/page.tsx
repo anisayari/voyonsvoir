@@ -106,7 +106,7 @@ export default function Home() {
         <div className={styles.logoSubtext}>REALITY DISTORTION EXPERIMENT</div>
       </div>
 
-      <a className={styles.contributorsLink} href="/promo">
+      <a className={`${styles.contributorsLink} ${styles.promosLink}`} href="/promos">
         Promotions
       </a>
 

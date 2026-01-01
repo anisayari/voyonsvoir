@@ -103,6 +103,10 @@
   padding: 20px;
 }
 
+.promosLink {
+  right: 280px;
+}
+
 .button {
   font-size: 3rem;
   padding: 35px 90px;
@@ -540,6 +544,11 @@
 
   .contributorsLink:hover {
     letter-spacing: 2px;
+  }
+
+  .promosLink {
+    right: 20px;
+    top: 70px;
   }
 
   .button {
