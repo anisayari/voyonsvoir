@@ -3,6 +3,11 @@
 Les gens, on va jouer à un jeu. 
 Voici un repo totalement vide : vous en faites ce que vous voulez, vous dev tout ce que vous voulez.
 
+## 🌐 Live Demo
+
+The application is automatically deployed to GitHub Pages on every push to the main branch:
+**[https://vachmara.github.io/voyonsvoir/](https://vachmara.github.io/voyonsvoir/)**
+
 ---
 
 ## Faisons des divisions avec des expressions régulières 🚀
