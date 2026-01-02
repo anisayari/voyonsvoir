@@ -76,7 +76,84 @@ Pour comparaison :
 
 </details>
 
-### 📜 La règle du jeu
+## 🐧 meta-mcxiv 🐧
+
+Un système d'exploitation Linux customisable pour Raspberry (4 et 5 ok) avec Yocto.
+
+### Build
+
+#### Environnement de build
+
+Soit se farcir l'installation des outils de dev Yocto, soit utiliser mon super Dockerfile tout prêt pour build dans le container. On prend la deuxième option, pour la première vous vous débrouillez hihi.
+
+```
+cd meta-mcxiv/
+# docker buildx ou autre
+docker buildx build -t yoctocker ./Dockerfile --load
+```
+
+#### Build yocto
+
+##### Choisir ta Raspberry Pi préférée (4 ou 5)
+
+Choisis ta Raspberry préférée en modifiant la ligne 4 du fichier `meta-mcxiv/project.yml` : 
+
+```
+machine: raspberrypi5 # ou "raspberryipi4-64"
+```
+
+##### Clone les meta-layers requises
+
+```
+cd meta-mcxiv/
+mkdir layers/
+cd layers/
+git clone https://git.yoctoproject.org/git/poky && cd poky && git checkout 357eb84b2a9bcb0f1c8f64a2989b133b37049d5b && cd ..
+git clone http://git.openembedded.org/meta-openembedded && cd meta-openembedded && git checkout 6c9f1f8d4538119803bf793747b65e4d23c33544 && cd ..
+git clone https://github.com/agherzan/meta-raspberrypi/ && cd meta-raspberrypi && git checkout 6df7e028a2b7b2d8cab0745dc0ed2eebc3742a17 && cd ..
+git clone https://git.yoctoproject.org/git/meta-virtualization && cd meta-virtualization && git checkout 94ee980814d7c5824449b2745a934664adbf3007 && cd ..
+
+```
+
+##### Le vrai build
+
+```
+docker run -it --workdir /home/yoctocker/ -v <le_path_de_voyonsvoir>/meta-mcxiv/:/home/yoctocker/ yoctocker:latest
+kas build project.yml
+```
+
+Là t'en as pour quelques heures en fonction de ta machine, alors va te reposer un bon coup! Je te conseille vivement 32 Go de RAM (Sinon, ajoute de la RAM swap) et 16 coeurs.
+
+### Flash Raspberry
+
+Sort du container Yoctocker et flash ta superbe carte SD en faisant gaffe de pas wipe ton ssd : 
+
+```
+cd meta-mcxiv/
+bzcat build/tmp/deploy/images/raspberrypi5/core-image-minimal-raspberrypi5.rootfs.wic.bz2 | sudo dd of=/dev/sda bs=4M status=progress conv=fsync
+# Attention au path en fonction du build rp4 ou rp5
+
+```
+
+Puis insert la carte SD dans ta Raspberri Pi 5.
+
+### Accès Raspberry
+
+Alimente ta Raspberry, et accèdes-y soit par la com. série, soit par ssh.
+
+```
+# Via com. série -> il te faut la debug probe Raspberry ou autre câble série
+minicom --device /dev/ttyACM0 -b 115200
+
+# Via ssh -> branche ta raspberry sur ton réseau local avec un câble ethernet, trouve son adresse ip et
+ssh root@<adresse-ip> # ya pas de password
+```
+
+Te voilà avec un superbe device embarqué, prêt à l'emploi! (curl, vim, python, docker, bash, git, e2fsprogs et ffmpeg déjà installés)
+
+---
+
+## 📜 La règle du jeu
 * Je merge **automatiquement** toutes les PR qui n’ont pas de conflit.
 * J’ai envie de voir ce qui en sort.
 

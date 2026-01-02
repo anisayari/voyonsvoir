@@ -1,0 +1,71 @@
+header:
+  version: 14
+
+machine: raspberrypi5
+distro: mcxiv-os
+target: core-image-minimal
+
+repos:
+  meta-mcxiv:
+
+  poky:
+    url: https://git.yoctoproject.org/git/poky
+    commit: 357eb84b2a9bcb0f1c8f64a2989b133b37049d5b
+    branch: scarthgap
+    path: layers/poky
+    layers:
+      meta:
+      meta-poky:
+
+  meta-openembedded:
+    url: http://git.openembedded.org/meta-openembedded
+    commit: 6c9f1f8d4538119803bf793747b65e4d23c33544
+    branch: scarthgap
+    path: layers/meta-openembedded
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+      meta-filesystems:
+
+  meta-raspberrypi:
+    url: https://github.com/agherzan/meta-raspberrypi/
+    path: layers/meta-raspberrypi
+    commit: 6df7e028a2b7b2d8cab0745dc0ed2eebc3742a17
+    branch: scarthgap
+
+  meta-virtualization:
+    url: https://git.yoctoproject.org/git/meta-virtualization
+    path: layers/meta-virtualization
+    commit: 94ee980814d7c5824449b2745a934664adbf3007
+    branch: scarthgap
+
+local_conf_header:
+  debug-tweaks: |
+    IMAGE_FEATURES += "debug-tweaks"
+
+  ssh: |
+    IMAGE_FEATURES += "ssh-server-openssh"
+  
+  rpi-specific: |
+    ENABLE_UART = "1"
+
+  base: |
+    CONF_VERSION = "2"
+    PACKAGE_CLASSES = "package_ipk"
+    INIT_MANAGER = "systemd"
+    DISTRO_FEATURES:append = " systemd pam"
+
+  add_custom: |
+    IMAGE_INSTALL:append = " curl"
+    IMAGE_INSTALL:append = " vim"
+    IMAGE_INSTALL:append = " python3"
+    IMAGE_INSTALL:append = " python3-pip"
+    IMAGE_INSTALL:append = " docker"
+    IMAGE_INSTALL:append = " bash"
+    IMAGE_INSTALL:append = " git"
+    IMAGE_INSTALL:append = " e2fsprogs"
+    IMAGE_INSTALL:append = " ffmpeg"
+
+  licenses: |
+    LICENSE_FLAGS_ACCEPTED = "synaptics-killswitch commercial"
