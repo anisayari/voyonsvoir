@@ -201,7 +201,7 @@ export default function Home() {
 
         {showCV && (
           <div className={styles.cvContainer}>
-            <img src="/CV.png" alt="CV" className={styles.cvImage} />
+            <img src="/CV.png" alt="Curriculum vitae document" className={styles.cvImage} />
           </div>
         )}
       </main>
