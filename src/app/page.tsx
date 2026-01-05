@@ -200,7 +200,12 @@ export default function Home() {
         )}
 
         {showCV && (
-          <div className={styles.cvContainer}>
+          <div
+            className={styles.cvContainer}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Curriculum vitae"
+          >
             <img src="/CV.png" alt="Curriculum vitae document" className={styles.cvImage} />
           </div>
         )}
