@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import BikiniEasterEgg from "./components/BikiniEasterEgg";
+import OmEasterEgg from "./components/OmEasterEgg";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -17,7 +18,8 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "VOYONSVOIR • Reality Distortion Experiment",
-  description: "An experimental collaborative project where reality bends with every click",
+  description:
+    "An experimental collaborative project where reality bends with every click",
 };
 
 export default function RootLayout({
@@ -29,6 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${spaceGrotesk.variable} ${jetBrainsMono.variable}`}>
         <BikiniEasterEgg />
+        <OmEasterEgg />
         {children}
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import styles from "./page.module.css";
 
 const EFFECTS = ["matrix", "glitch", "portal", "invert", "static"] as const;
@@ -23,6 +23,7 @@ const THRESHOLDS = {
   WARNING: 5,
   CRITICAL: 15,
   CHAOS: 30,
+  CV_TRIGGER: 33,
 } as const;
 
 const TIMINGS = {
@@ -33,12 +34,13 @@ const TIMINGS = {
   CHAOS_CYCLES: 10,
 } as const;
 
-type Effect = typeof EFFECTS[number];
+type Effect = (typeof EFFECTS)[number];
 
 export default function Home() {
   const [activeEffect, setActiveEffect] = useState<Effect | null>(null);
   const [glitchText, setGlitchText] = useState(BUTTON_TEXT);
   const [clickCount, setClickCount] = useState(0);
+  const [showCV, setShowCV] = useState(false);
 
   const glitchify = useCallback((text: string) => {
     return text
@@ -46,7 +48,7 @@ export default function Home() {
       .map((char) =>
         Math.random() > 0.7
           ? GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]
-          : char
+          : char,
       )
       .join("");
   }, []);
@@ -85,6 +87,11 @@ export default function Home() {
     const newCount = clickCount + 1;
     setClickCount(newCount);
 
+    if (newCount >= THRESHOLDS.CV_TRIGGER) {
+      setShowCV(true);
+      setTimeout(() => setShowCV(false), 3000);
+    }
+
     if (newCount >= THRESHOLDS.CHAOS) {
       triggerChaosMode();
     } else {
@@ -95,12 +102,28 @@ export default function Home() {
   }, [clickCount, triggerChaosMode, triggerRandomEffect, triggerGlitchText]);
 
   const getRandomMessage = useCallback(
-    () => MYSTERIOUS_MESSAGES[Math.floor(Math.random() * MYSTERIOUS_MESSAGES.length)],
-    []
+    () =>
+      MYSTERIOUS_MESSAGES[
+        Math.floor(Math.random() * MYSTERIOUS_MESSAGES.length)
+      ],
+    [],
   );
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (showCV && event.key === "Escape") {
+        setShowCV(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showCV]);
+
   return (
-    <div className={`${styles.page} ${activeEffect ? styles[activeEffect] : ""}`}>
+    <div
+      className={`${styles.page} ${activeEffect ? styles[activeEffect] : ""}`}
+    >
       <div className={styles.logo}>
         <div className={styles.logoText}>VOYONSVOIR</div>
         <div className={styles.logoSubtext}>REALITY DISTORTION EXPERIMENT</div>
@@ -113,7 +136,11 @@ export default function Home() {
       {activeEffect === "matrix" && (
         <div className={styles.matrixRain}>
           {Array.from({ length: 20 }).map((_, i) => (
-            <div key={i} className={styles.matrixColumn} style={{ left: `${i * 5}%` }}>
+            <div
+              key={i}
+              className={styles.matrixColumn}
+              style={{ left: `${i * 5}%` }}
+            >
               {getRandomMessage()}
             </div>
           ))}
@@ -132,9 +159,7 @@ export default function Home() {
         </div>
       )}
 
-      {activeEffect === "static" && (
-        <div className={styles.staticNoise}></div>
-      )}
+      {activeEffect === "static" && <div className={styles.staticNoise}></div>}
 
       <main>
         <button
@@ -148,7 +173,9 @@ export default function Home() {
           <div className={styles.statsPanel}>
             <div className={styles.statItem}>
               <span className={styles.statLabel}>ANOMALIES</span>
-              <span className={styles.statValue}>{clickCount.toString().padStart(3, '0')}</span>
+              <span className={styles.statValue}>
+                {clickCount.toString().padStart(3, "0")}
+              </span>
             </div>
             {clickCount > THRESHOLDS.WARNING && (
               <div className={styles.warningMessage}>
@@ -156,18 +183,25 @@ export default function Home() {
                 SYSTEM INSTABILITY DETECTED
               </div>
             )}
-            {clickCount > THRESHOLDS.CRITICAL && clickCount < THRESHOLDS.CHAOS && (
-              <div className={styles.criticalMessage}>
-                <span className={styles.criticalIcon}>⛔</span>
-                REALITY BREACH IMMINENT
-              </div>
-            )}
+            {clickCount > THRESHOLDS.CRITICAL &&
+              clickCount < THRESHOLDS.CHAOS && (
+                <div className={styles.criticalMessage}>
+                  <span className={styles.criticalIcon}>⛔</span>
+                  REALITY BREACH IMMINENT
+                </div>
+              )}
             {clickCount >= THRESHOLDS.CHAOS && (
               <div className={styles.chaosMessage}>
                 <span className={styles.chaosIcon}>💀</span>
                 CHAOS MODE ACTIVATED
               </div>
             )}
+          </div>
+        )}
+
+        {showCV && (
+          <div className={styles.cvContainer}>
+            <img src="/CV.png" alt="CV" className={styles.cvImage} />
           </div>
         )}
       </main>

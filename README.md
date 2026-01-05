@@ -91,6 +91,7 @@ Pour comparaison :
 ---
 
 # HAVE FUN ! And PUT ME IN BIKINI NOW ! 👙
+Et essayez de cliquer 13 fois en 5 secondes pour un easter egg OM ! ⚽
 
 ## Safety Notice / Notice de securite
 
