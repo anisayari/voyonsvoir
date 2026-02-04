@@ -1,0 +1,175 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        #ff6b6b 0%,
+        #ffa500 25%,
+        #ffd700 50%,
+        #ffeb3b 75%,
+        #ff4500 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.content {
+    text-align: center;
+    padding: 2rem;
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.emojiContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.emoji {
+    width: 4rem;
+    height: 4rem;
+    animation: bounce 1s infinite;
+    display: inline-block;
+}
+
+.emoji:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.emoji:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.emoji:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.emoji:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.emoji:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.emoji:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.emoji:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow:
+        3px 3px 6px rgba(0, 0, 0, 0.3),
+        -1px -1px 0 #ff4500,
+        1px -1px 0 #ff4500,
+        -1px 1px 0 #ff4500,
+        1px 1px 0 #ff4500;
+    margin-bottom: 2rem;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.trophy {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.trophyDrip {
+    display: inline-block;
+    animation: drip 2s ease-in-out infinite;
+}
+
+.trophyDrip:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.trophyDrip:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.trophyDrip:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes drip {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(10px) rotate(-5deg);
+    }
+    75% {
+        transform: translateY(-5px) rotate(5deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .emoji {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .trophy {
+        font-size: 2rem;
+    }
+}
