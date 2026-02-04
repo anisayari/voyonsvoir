@@ -1,129 +1,110 @@
 .page {
   min-height: 100vh;
   padding: 2rem;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background-color: #0a0a0a;
+}
+
+.backLink {
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.backLink:hover {
+  color: #666;
 }
 
 .main {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .title {
-  font-size: 3rem;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 3rem;
   text-align: center;
-  margin-bottom: 1rem;
-  background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: rainbow 5s ease infinite;
 }
 
-@keyframes rainbow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.subtitle {
-  color: #a0a0a0;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-bottom: 2rem;
-  max-width: 600px;
-}
-
-/* Global Stats Section */
 .globalStats {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 100%;
-  max-width: 800px;
+  gap: 3rem;
+  margin-bottom: 4rem;
 }
 
 .statBox {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 2rem;
-  min-width: 120px;
-}
-
-.statIcon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
 }
 
 .statValue {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #ffffff;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: #fff;
 }
 
 .statLabel {
-  font-size: 0.85rem;
-  color: #888;
+  font-size: 0.75rem;
+  color: #666;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  margin-top: 0.25rem;
 }
 
 .additions {
-  color: #4ade80 !important;
+  color: #4ade80;
 }
 
-.deletionsText {
-  color: #f87171 !important;
+.deletions {
+  color: #f87171;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: 1px;
   width: 100%;
+  background-color: #222;
   margin-bottom: 3rem;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  background-color: #0a0a0a;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 0.3s ease;
-  animation: fadeIn 0.5s ease backwards;
   text-decoration: none;
+  transition: background-color 0.3s ease;
+  animation: fadeIn 0.4s ease backwards;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 .card:hover {
-  transform: translateY(-10px) scale(1.02);
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 255, 255, 0.2);
+  background-color: #111;
 }
 
 .avatarContainer {
@@ -133,44 +114,42 @@
 
 .avatar {
   border-radius: 50%;
-  border: 3px solid transparent;
-  background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb) border-box;
-  transition: transform 0.3s ease;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
 }
 
 .card:hover .avatar {
-  transform: rotate(360deg);
+  filter: grayscale(0%);
 }
 
-.crown {
+.rank {
   position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2rem;
-  animation: bounce 1s ease infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-10px); }
-}
-
-.username {
-  color: #ffffff;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  color: #0a0a0a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
-/* Individual Stats Grid */
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-  width: 100%;
+.username {
+  font-family: var(--font-space-grotesk), sans-serif;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
   margin-bottom: 1rem;
-  text-align: center;
+}
+
+.statsGrid {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .stat {
@@ -180,101 +159,60 @@
 }
 
 .statNumber {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: #fff;
 }
 
 .statName {
-  font-size: 0.7rem;
-  color: #888;
+  font-size: 0.65rem;
+  color: #666;
   text-transform: uppercase;
 }
 
-/* Ratio Bar */
 .ratioBar {
-  display: flex;
   width: 100%;
-  height: 6px;
-  border-radius: 3px;
+  height: 2px;
+  background-color: #222;
   overflow: hidden;
-  margin-bottom: 1rem;
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .additionsBar {
   height: 100%;
-  background: linear-gradient(90deg, #22c55e, #4ade80);
-  transition: width 0.3s ease;
-}
-
-.deletionsBar {
-  height: 100%;
-  background: linear-gradient(90deg, #ef4444, #f87171);
-  transition: width 0.3s ease;
-}
-
-.contributions {
-  color: #888;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-.badge {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  color: white;
-  font-weight: 500;
+  background-color: #4ade80;
 }
 
 .noContributors {
-  color: #a0a0a0;
-  font-size: 1.5rem;
+  color: #666;
+  font-size: 1rem;
   text-align: center;
   padding: 4rem;
 }
 
-.backLink {
-  color: #48dbfb;
-  font-size: 1rem;
-  padding: 0.75rem 1.5rem;
-  border: 1px solid #48dbfb;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.backLink:hover {
-  background: #48dbfb;
-  color: #1a1a2e;
-}
-
 @media (max-width: 768px) {
+  .backLink {
+    top: 20px;
+    left: 20px;
+    font-size: 0.9rem;
+  }
+
+  .main {
+    padding-top: 60px;
+  }
+
   .title {
-    font-size: 2rem;
-  }
-  
-  .subtitle {
-    font-size: 1rem;
-  }
-  
-  .grid {
-    grid-template-columns: 1fr;
+    margin-bottom: 2rem;
   }
 
   .globalStats {
-    padding: 1rem;
-    gap: 1rem;
-  }
-
-  .statBox {
-    padding: 0.75rem 1rem;
-    min-width: 100px;
+    gap: 2rem;
   }
 
   .statValue {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
